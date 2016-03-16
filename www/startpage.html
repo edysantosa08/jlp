@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="instafeed.js"></script>
+<script>
+$(document).on('deviceready', function() {
+tokenn=localStorage.token;
+showSpinner();
+if (localStorage.token != null){
+$.ajax({
+    url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token='+tokenn,
+    dataType: 'JSONP',
+    success: function(data, status) {
+        var localData = JSON.stringify(data);
+        window.localStorage.setItem('selfinsta', localData);
+var instaself = JSON.parse(localData);
+        $.each(instaself.data, function(i,posts){
+	    var id=posts.id;
+		var link=posts.link;
+		var content=posts.caption.text;
+		var likes=posts.likes.count;
+		var images=posts.images.low_resolution.url;
+		var thumbnail=posts.images.thumbnail.url;
+		var imgstandard=posts.images.standard_resolution.url;
+if(posts.location!=null){
+	    var latitude=posts.location.latitude;
+	    var longitude=posts.location.longitude;
+		var locid=posts.location.id;
+		var locname=posts.location.name; }
+
+var poswrap="";
+poswrap += "<div class='wrapbox bvgrey dblock'><div class='wrapper posrelhid post-img'>";
+poswrap += "<img src='"+images+"'\/>";
+poswrap += "<a id='share' class='curpon bd-none pad5 mrg2 fwhite dinblock rad5 font120' data-image='"+imgstandard+"'><span class='lnr lnr-location'\/><\/a><\/div>";
+poswrap += "<div class='textwrap pad5'><p class='font80 text-left fgrey'>"+content+"<\/p><\/div><\/div>";
+$('#result').append(poswrap);
+hideSpinner();
+           });
+    }
+});}
+
+ });
+</script>
+<title>JanganLupaPulang.xyz</title>
+    </head>
+    <body >
+<div id='head' class='text-right width100 bblack one-edge-shadow'>
+<div class=''>
+<div class='lnr lnr-menu font150 fwhite floleft mrg10'></div>
+<div id='ambilgambar' class='curpon bd-none pad5 mrg2 fyellow dinblock rad5 font150'><span class='lnr lnr-camera'/></div>
+<div id="galeri" class='curpon bd-none pad5 mrg5 mrg2 fyellow dinblock rad5 font150'><span class='lnr lnr-picture'/></div>
+</div>
+</div>
+<div class="centerdiv text-center bwhite">
+<div id="result" class='width100 centerdiv text-center' style='min-height:600'>
+<div id='loader'></div>
+</div>
+<div class=''>
+</div>
+<div  id="wadah" class='post-img'>
+<img id="image" src="">
+</div>
+        </div>
+
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
