@@ -3,9 +3,16 @@ var destinationType; // sets the format of returned value
 // Wait for device API libraries to load
 //
 document.addEventListener("deviceready", onDeviceReady, false);
+
+
+
+
 function onDeviceReady() {
 pictureSource = navigator.camera.PictureSourceType;
 destinationType = navigator.camera.DestinationType;
+document.addEventListener("backbutton", function(e){
+navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", "Yes,No");
+}, false);
 }
 // Called when a photo is successfully retrieved
 //
@@ -78,12 +85,6 @@ sourceType: source
 
 function onFail(message) {
 //alert('Failed because: ' + message);
-}
-
-function onDeviceReady(){
-document.addEventListener("backbutton", function(e){
-navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", "Yes,No");
-}, false);
 }
 
 function onConfirm(button) {

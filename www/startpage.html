@@ -11,6 +11,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="instafeed.js"></script>
 <script>
+
 $(document).on('deviceready', function() {
 tokenn=localStorage.token;
 showSpinner();
@@ -45,7 +46,7 @@ if(posts.location!=null){
 var poswrap="";
 poswrap += "<div class='wrapbox bvgrey dblock'><div class='wrapper posrelhid post-img'>";
 poswrap += "<img src='"+images+"'\/>";
-poswrap += "<a onclick=\"window.plugins.socialsharing.share(' ', '', '"+imgstandard+"', '"+link+"')\" id='share' class='curpon bd-none pad5 mrg2 fwhite dinblock rad5 font120' data-image='"+imgstandard+"'><span class='lnr lnr-location'\/><\/a><\/div>";
+poswrap += "<span onclick=\"window.plugins.socialsharing.share('', '','"+imgstandard+"','"+link+"')\" id='share' class='curpon bd-none pad5 mrg2 fwhite dinblock rad5 font200' data-image='"+imgstandard+"'><span class='lnr lnr-location'\/><\/span><\/div>";
 poswrap += "<div class='textwrap pad5'><p class='font80 text-left fgrey'>"+content+"<\/p><\/div><\/div>";
 $('#result').append(poswrap);
 hideSpinner();
