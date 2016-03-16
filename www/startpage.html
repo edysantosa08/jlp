@@ -17,19 +17,19 @@ tokenn=localStorage.token;
 showSpinner();
 if (localStorage.token != null){
 if(localStorage.selfinsta != null){
-var instaself = JSON.parse(localStorage.selfinsta);
+var instaself = localStorage.selfinsta;
 } else{
 $.ajax({
     url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token='+tokenn,
     dataType: 'JSONP',
     success: function(data, status) {
         var localData = JSON.stringify(data);
-        var instaself = JSON.parse(localData);
+        var instaself = localData;
         window.localStorage.setItem('selfinsta', localData);} });
 }
 
-
-        $.each(instaself.data, function(i,posts){
+   var instasf=JSON.parse(instaself);
+        $.each(instasf.data, function(i,posts){
 	    var id=posts.id;
 		var link=posts.link;
 		var content=posts.caption.text;
